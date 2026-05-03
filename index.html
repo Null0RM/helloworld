@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>국방헬프콜 1303</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  background: #1c1c1c;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* ── Top yellow header ── */
+.top-header {
+  background: #c9961e;
+  padding: 10px 14px 12px;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.menu-btn {
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bell-wrap { position: relative; cursor: pointer; }
+.bell-dot {
+  position: absolute;
+  top: 0; right: 0;
+  width: 9px; height: 9px;
+  background: #e53935;
+  border-radius: 50%;
+}
+
+.header-info {
+  font-size: 14px;
+  font-weight: bold;
+  color: #111;
+  line-height: 1.7;
+}
+
+.support-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #111;
+  margin-top: 2px;
+}
+
+.support-num {
+  font-size: 14px;
+  font-weight: bold;
+  color: #111;
+}
+
+.support-hours {
+  font-size: 12px;
+  color: #333;
+}
+
+/* ── Logo band ── */
+.logo-band {
+  background: linear-gradient(to bottom, #c9961e 0%, #1c1c1c 55%);
+  padding: 10px 20px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.logo-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.logo-sub {
+  font-size: 16px;
+  font-weight: bold;
+  color: #7ecef4;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+
+.logo-num {
+  font-size: 46px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+/* ── Main dark area ── */
+.main-area {
+  background: #1c1c1c;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px 16px;
+}
+
+.ring-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+}
+
+#ring-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.ring-group {
+  animation: spin 3.5s linear infinite;
+  transform-origin: 140px 140px;
+}
+
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.days-lbl {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.time-lbl {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+/* ── Warning box ── */
+.warning-box {
+  background: #b71c1c;
+  margin: 0 14px 10px;
+  padding: 11px 14px;
+  border-radius: 7px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* ── Buttons ── */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  padding: 0 14px 12px;
+}
+
+.cam-btn {
+  flex: 1;
+  background: #2c2c2c;
+  border: 1px solid #484848;
+  color: #fff;
+  padding: 13px 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  line-height: 1.55;
+  user-select: none;
+}
+
+.cam-btn .sub {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.version {
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+  padding-bottom: 14px;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<div class="top-header">
+  <div class="top-nav">
+    <button class="menu-btn">메뉴</button>
+
+    <!-- Military star emblem -->
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      <polygon points="19,2 23.5,14 37,14 26.5,21.5 30.5,34 19,27 7.5,34 11.5,21.5 1,14 14.5,14"
+               fill="white" opacity="0.92"/>
+    </svg>
+
+    <!-- Bell icon -->
+    <div class="bell-wrap">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <path d="M15 3.5C15 3.5 8.5 5.5 8.5 13.5V20L6 22.5H24L21.5 20V13.5C21.5 5.5 15 3.5 15 3.5Z"
+              fill="white"/>
+        <rect x="12" y="23.5" width="6" height="3" rx="1.5" fill="white"/>
+      </svg>
+      <span class="bell-dot"></span>
+    </div>
+  </div>
+
+  <div class="header-info">
+    설치일시 : 25.06.10 20:48<br>
+    차단일시 : 25.06.13 19:30
+  </div>
+  <div class="support-title">고객지원센터</div>
+  <div class="support-num">02) 6424 - 5282 ~ 5284</div>
+  <div class="support-hours">09~21시(평일)/09~18시(휴일)</div>
+</div>
+
+<!-- LOGO BAND -->
+<div class="logo-band">
+  <!-- Person + shield figure -->
+  <svg width="48" height="54" viewBox="0 0 48 54" fill="none">
+    <circle cx="24" cy="11" r="9" fill="#1565c0"/>
+    <path d="M6 52 Q6 30 24 30 Q42 30 42 52Z" fill="#1565c0"/>
+  </svg>
+
+  <div class="logo-text-wrap">
+    <div class="logo-sub">
+      국방헬프콜
+      <!-- small bell -->
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="#7ecef4">
+        <path d="M9 2C9 2 5 3.5 5 8.5V13L3.5 14.5H14.5L13 13V8.5C13 3.5 9 2 9 2Z"/>
+        <rect x="7" y="15" width="4" height="2" rx="1" fill="#7ecef4"/>
+      </svg>
+    </div>
+    <div class="logo-num">1303</div>
+  </div>
+</div>
+
+<!-- MAIN CIRCLE AREA -->
+<div class="main-area">
+  <div class="ring-wrapper">
+
+    <!-- Rotating dashed ring -->
+    <svg id="ring-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+      <g class="ring-group" id="ring-group"></g>
+    </svg>
+
+    <!-- Center: camera prohibition icon + timer -->
+    <div class="center-content">
+      <svg width="148" height="148" viewBox="0 0 148 148">
+        <!-- Camera body -->
+        <rect x="12" y="48" width="124" height="82" rx="10" ry="10"
+              fill="none" stroke="white" stroke-width="5.5"/>
+        <!-- Top bump -->
+        <rect x="52" y="32" width="32" height="19" rx="6"
+              fill="none" stroke="white" stroke-width="5.5"/>
+        <!-- Lens outer ring -->
+        <circle cx="74" cy="89" r="26" fill="none" stroke="white" stroke-width="5.5"/>
+        <!-- Lens inner ring -->
+        <circle cx="74" cy="89" r="12" fill="none" stroke="white" stroke-width="4"/>
+        <!-- Flash dot -->
+        <circle cx="108" cy="62" r="6" fill="white"/>
+
+        <!-- Prohibition circle -->
+        <circle cx="74" cy="74" r="66" fill="none" stroke="#e53935" stroke-width="7"/>
+        <!-- Prohibition slash (top-left to bottom-right at ~45°) -->
+        <line x1="22" y1="22" x2="126" y2="126"
+              stroke="#e53935" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+
+      <div class="days-lbl" id="days-lbl">0 일</div>
+      <div class="time-lbl" id="time-lbl">00:00:00</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WARNING -->
+<div class="warning-box">
+  임의로 앱 또는 프로파일 삭제 시, 보안규정 위배에 따른 불이익이 발생할 수 있으니
+  부대내 보안 담당자 승인 및 입회하에 삭제를 바랍니다.
+</div>
+
+<!-- BUTTONS -->
+<div class="btn-row">
+  <div class="cam-btn">
+    카메라 해제<br>
+    <span class="sub">[Beacon]</span>
+  </div>
+  <div class="cam-btn">
+    카메라 해제<br>
+    <span class="sub">[GPS]</span>
+  </div>
+</div>
+
+<div class="version">Version 3.0.10</div>
+
+<script>
+  /* ── Build rotating ring segments ── */
+  (function () {
+    const g   = document.getElementById('ring-group');
+    const cx  = 140, cy = 140;
+    const R   = 122;          // ring radius
+    const N   = 32;           // number of segments
+    const W   = 15, H = 7;   // segment width × height
+
+    for (let i = 0; i < N; i++) {
+      const angleDeg = (i / N) * 360;
+      const angleRad = (angleDeg - 90) * Math.PI / 180;
+      const x = cx + R * Math.cos(angleRad);
+      const y = cy + R * Math.sin(angleRad);
+
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x',         x - W / 2);
+      rect.setAttribute('y',         y - H / 2);
+      rect.setAttribute('width',     W);
+      rect.setAttribute('height',    H);
+      rect.setAttribute('rx',        2.5);
+      rect.setAttribute('fill',      '#545454');
+      rect.setAttribute('transform', `rotate(${angleDeg}, ${x}, ${y})`);
+      g.appendChild(rect);
+    }
+  })();
+
+  /* ── Live timer (counts up) ── */
+  const t0 = Date.now();
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const s    = Math.floor((Date.now() - t0) / 1000);
+    const days = Math.floor(s / 86400);
+    const hh   = Math.floor((s % 86400) / 3600);
+    const mm   = Math.floor((s % 3600)  / 60);
+    const ss   = s % 60;
+
+    document.getElementById('days-lbl').textContent = days + ' 일';
+    document.getElementById('time-lbl').textContent =
+      pad(hh) + ':' + pad(mm) + ':' + pad(ss);
+  }
+
+  setInterval(tick, 1000);
+  tick();
+</script>
+</body>
+</html>
