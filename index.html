@@ -3,9 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
 <title>국방헬프콜 1303</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root { color-scheme: light; }
+
+html {
+  background: #1c1c1c;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
@@ -20,7 +30,7 @@ body {
 
 /* ── Top yellow header ── */
 .top-header {
-  background: #c9961e;
+  background: #c9961e !important;
   padding: 10px 14px 12px;
 }
 
@@ -54,26 +64,26 @@ body {
 .header-info {
   font-size: 14px;
   font-weight: bold;
-  color: #111;
+  color: #111 !important;
   line-height: 1.7;
 }
 
 .support-title {
   font-size: 13px;
   font-weight: bold;
-  color: #111;
+  color: #111 !important;
   margin-top: 2px;
 }
 
 .support-num {
   font-size: 14px;
   font-weight: bold;
-  color: #111;
+  color: #111 !important;
 }
 
 .support-hours {
   font-size: 12px;
-  color: #333;
+  color: #444 !important;
 }
 
 /* ── Logo band ── */
@@ -148,11 +158,11 @@ body {
 
 /* ── Warning box ── */
 .warning-box {
-  background: #b71c1c;
-  margin: 0 14px 10px;
+  background: #b71c1c !important;
+  margin: 0 16px 10px;
   padding: 11px 14px;
   border-radius: 7px;
-  color: #fff;
+  color: #fff !important;
   font-size: 13px;
   line-height: 1.65;
   text-align: center;
@@ -162,14 +172,14 @@ body {
 .btn-row {
   display: flex;
   gap: 10px;
-  padding: 0 14px 12px;
+  padding: 0 16px 12px;
 }
 
 .cam-btn {
   flex: 1;
-  background: #2c2c2c;
-  border: 1px solid #484848;
-  color: #fff;
+  background: #363636 !important;
+  border: 1px solid #505050 !important;
+  color: #fff !important;
   padding: 13px 8px;
   border-radius: 8px;
   font-size: 14px;
@@ -178,12 +188,20 @@ body {
   cursor: pointer;
   line-height: 1.55;
   user-select: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.cam-btn:active {
+  background: #444 !important;
 }
 
 .cam-btn .sub {
-  color: #aaa;
+  color: #bbb !important;
   font-size: 12px;
   font-weight: normal;
+  display: block;
 }
 
 .version {
